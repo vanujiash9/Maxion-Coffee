@@ -1,0 +1,23 @@
+.image{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.anh{
+    border: 1px solid gray;
+
+    
+}
+h2{
+    color: blue;
+}
+button{
+    color: red;
+    height: 30px;
+    width: 100px;
+    background-color: aquamarine;
+}
+.productlist{
+    display: flex;
+    justify-content: space-evenly;
+}

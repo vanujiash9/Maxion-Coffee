@@ -1,0 +1,9 @@
+.a{
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+    color:white;
+    height: 120px;
+    align-items: center;
+    margin-top:20px;
+}
