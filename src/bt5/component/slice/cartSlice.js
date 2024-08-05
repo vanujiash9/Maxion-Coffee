@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 
 const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
-
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -20,12 +19,13 @@ const cartSlice = createSlice({
       }
 
       state.cart = cart;
+
       localStorage.setItem("cart", JSON.stringify(cart));
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 500,
+        timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -43,11 +43,17 @@ const cartSlice = createSlice({
       if (index !== -1) {
         cart.splice(index, 1);
       }
-      state.cart = cart; 
-      localStorage.setItem("cart", JSON.stringify(cart));
- 
-    },
+      state.cart = cart;
     
+      localStorage.setItem("cart", JSON.stringify(cart));
+      Swal.fire({
+        icon: "success",
+        title: "Product removed successfully",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    },
+
     increase(state, action) {
       const productId = action.payload;
       const index = state.cart.findIndex((item) => item.id === productId);
@@ -59,19 +65,14 @@ const cartSlice = createSlice({
     decrease(state, action) {
       const productId = action.payload;
       const index = state.cart.findIndex((item) => item.id === productId);
-
       if (index !== -1) {
-        if (state.cart[index].quantity > 1) {
-          state.cart[index].quantity -= 1;
-        }
-        else {
-          state.cart.splice(index, 1);
-        }
+        state.cart[index].quantity += 1;
         localStorage.setItem("cart", JSON.stringify(state.cart));
       }
-    }
+    },
+
   }
 });
 
-export const { addtoCart, removeCart, increase, decrease } = cartSlice.actions;
+export const { addtoCart, removeCart, increase, decrease} = cartSlice.actions;
 export default cartSlice.reducer;

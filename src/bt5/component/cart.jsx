@@ -1,61 +1,21 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increase, removeCart, decrease } from '../redux/slice/cartSlice'; 
-import Swal from 'sweetalert2';
+import { increase, removeCart, decrease } from '../component/slice/cartSlice'; // Đảm bảo đường dẫn đúng
 
 
 function Cart() {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-
+  const RemoveCart = (id) => {
+    dispatch(removeCart(id)); 
+  };
 
   const Increase = (id) => {
     dispatch(increase(id));
   };
-  const Decrease = (id) => {
-    const product = cart.find(item => item.id === id);
-  
-    if (product && product.quantity === 1) {
-      Swal.fire({
-        title: 'Bạn có chắc chắn muốn xóa sản phẩm này?',
-        text: "Sản phẩm sẽ được xóa khỏi giỏ hàng!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Có, xóa!',
-        cancelButtonText: 'Hủy'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log('Removing item');
-          dispatch(decrease(id));
-        }
-      });
-    } else {
-      dispatch(decrease(id));
-    }
-  };
-  
-  const RemoveCart = (id) => {
-    console.log('Remove button clicked');
-    Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa sản phẩm này?',
-      text: "Sản phẩm sẽ được xóa khỏi giỏ hàng!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Có, xóa!',
-      cancelButtonText: 'Hủy'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log('Removing item');
-        dispatch(removeCart(id));
-      }
-    });
-  };
-  
+  const Decrease =(id)=>
+    dispatch(decrease(id))
   return (
     <div>
       <div className="container mx-auto mt-10">

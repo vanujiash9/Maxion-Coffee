@@ -7,49 +7,49 @@ const staticProductList = [
     "id": "1",
     "name": "Iced Skinny Flavored Latte",
     "imgURL": "https://images.unsplash.com/photo-1462917882517-e150004895fa?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "136.000 VND"
+    "price": 136000
   },
   {
     "id": "2",
     "name": "Hazelnut Macchiato",
     "imgURL": "https://images.unsplash.com/photo-1689358931339-cf2ccd39e7b1?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "139.000 VND"
+    "price": 139000
   },
   {
     "id": "3",
     "name": "Asian Dolce Latte",
     "imgURL": "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?q=80&w=1886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "149.000 VND"
+    "price": 149000
   },
   {
     "id": "4",
     "name": "Café Bombón",
     "imgURL": "https://images.unsplash.com/photo-1574282341921-cdeeab8e1ab1?q=80&w=1883&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "109.000 VND"
+    "price": 109000
   },
   {
     "id": "5",
     "name": "Café Cubano",
     "imgURL": "https://images.unsplash.com/photo-1609269139795-8378b1090a78?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "119.000 VND"
+    "price": 119000
   },
   {
     "id": "6",
     "name": "Café au Lait",
     "imgURL": "https://images.unsplash.com/photo-1647919231480-341269728e9f?q=80&w=1886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "129.000 VND"
+    "price": 129000
   },
   {
     "id": "7",
     "name": "Affogato",
     "imgURL": "https://images.unsplash.com/photo-1647919236988-b62126eb0c65?q=80&w=1886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "149.000 VND"
+    "price":149000
   },
   {
     "id": "8",
     "name": "Flat White",
     "imgURL": "https://images.unsplash.com/photo-1527156231393-7023794f363c?q=80&w=1911&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "price": "120.000 VND"
+    "price": 120000
   }
 ];
 
