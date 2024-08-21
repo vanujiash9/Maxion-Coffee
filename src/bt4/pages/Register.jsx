@@ -26,75 +26,79 @@ function Register() {
       ...formValues,
       [name]: value,
     });
+    validateField(name, value); // Validate field on change
+  };
 
-    // Real-time validation for username and email
-    if (name === 'username') {
-      if (value.length <= 3) {
-        setFormErrors((prevErrors) => ({
-          ...prevErrors,
-          username: 'Tên người dùng phải nhiều hơn 3 kí tự',
-        }));
-      } else {
-        setFormErrors((prevErrors) => ({
-          ...prevErrors,
-          username: '',
-        }));
-      }
-    }
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    validateField(name, formValues[name]); // Validate field on blur
+  };
 
-    if (name === 'email') {
-      if (!/\S+@\S+\.\S+/.test(value)) {
-        setFormErrors((prevErrors) => ({
-          ...prevErrors,
-          email: 'Email không hợp lệ',
-        }));
-      } else {
-        setFormErrors((prevErrors) => ({
-          ...prevErrors,
-          email: '',
-        }));
-      }
+  const validateField = (name, value) => {
+    let error = '';
+    switch (name) {
+      case 'username':
+        if (!value) {
+          error = 'Tên người dùng là bắt buộc';
+        } else if (value.length < 4) {
+          error = 'Tên người dùng phải có ít nhất 4 kí tự';
+        }
+        break;
+      case 'email':
+        if (!value) {
+          error = 'Email là bắt buộc';
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          error = 'Email không hợp lệ';
+        }
+        break;
+      case 'password':
+        if (!value) {
+          error = 'Cần phải cập nhật mật khẩu';
+        } else if (value.length < 8) {
+          error = 'Mật khẩu phải có ít nhất 8 kí tự';
+        } else if (!/[A-Z]/.test(value)) {
+          error = 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa';
+        }
+        break;
+      case 'confirmPassword':
+        if (!value) {
+          error = 'Cần phải xác nhận mật khẩu';
+        } else if (value !== formValues.password) {
+          error = 'Mật khẩu không khớp';
+        }
+        break;
+      default:
+        break;
     }
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
   };
 
   const validateForm = () => {
     let isValid = true;
-    const errors = {};
-
-    // Static validation for email and username on submit
-    if (!formValues.username) {
-      errors.username = 'Tên người dùng là bắt buộc';
-      isValid = false;
-    } else if (formValues.username.length <= 3) {
-      errors.username = 'Tên người dùng phải nhiều hơn 3 kí tự';
-      isValid = false;
-    }
-
-    if (!formValues.email) {
-      errors.email = 'Email là bắt buộc';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-      errors.email = 'Email không hợp lệ';
-      isValid = false;
-    }
-
+    Object.keys(formValues).forEach((field) => {
+      validateField(field, formValues[field]);
+      if (formErrors[field]) {
+        isValid = false;
+      }
+    });
+    // Ensure all fields are validated
     if (!formValues.password) {
-      errors.password = 'Cần phải cập nhật mật khẩu';
-      isValid = false;
-    } else if (formValues.password.length < 8) {
-      errors.password = 'Mật khẩu phải có ít nhất 8 kí tự';
-      isValid = false;
-    } else if (!/[A-Z]/.test(formValues.password)) {
-      errors.password = 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa';
+      setFormErrors((prevErrors) => ({
+        ...prevErrors,
+        password: 'Cần phải cập nhật mật khẩu',
+      }));
       isValid = false;
     }
-
-    if (formValues.password !== formValues.confirmPassword) {
-      errors.confirmPassword = 'Mật khẩu không khớp';
+    if (!formValues.confirmPassword) {
+      setFormErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: 'Cần phải xác nhận mật khẩu',
+      }));
       isValid = false;
     }
-
-    setFormErrors(errors);
     return isValid;
   };
 
@@ -143,20 +147,22 @@ function Register() {
               type="text"
               value={formValues.username}
               onChange={handleChange}
+              onBlur={handleBlur}
               name="username"
               error={!!formErrors.username}
               helperText={formErrors.username}
-              className="w-full" 
+              className="w-full"
             />
             <BasicTextField
               label="Email"
               type="email"
               value={formValues.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               name="email"
               error={!!formErrors.email}
               helperText={formErrors.email}
-              className="w-full" 
+              className="w-full"
             />
             <div className="relative">
               <BasicTextField
@@ -164,10 +170,11 @@ function Register() {
                 type={showPassword ? 'text' : 'password'}
                 value={formValues.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="password"
                 error={!!formErrors.password}
                 helperText={formErrors.password}
-                className="w-full" 
+                className="w-full"
               />
               <button
                 type="button"
@@ -183,10 +190,11 @@ function Register() {
                 type={showPassword ? 'text' : 'password'}
                 value={formValues.confirmPassword}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="confirmPassword"
                 error={!!formErrors.confirmPassword}
                 helperText={formErrors.confirmPassword}
-                className="w-full" 
+                className="w-full"
               />
             </div>
             <div className="mt-4 flex items-center justify-between">
